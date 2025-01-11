@@ -6,7 +6,9 @@ import com.example.mongodb_springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,7 +27,14 @@ public class UserResource {
 
     @GetMapping(value = "/{id}")
     ResponseEntity<UserDTO> findAll(@PathVariable String id) {
-        User obj = service.findById(id);
-        return ResponseEntity.ok().body(new UserDTO(obj));
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(new UserDTO(user));
+    }
+
+    @PostMapping()
+    ResponseEntity<UserDTO> insert(@RequestBody UserDTO userDTO) {
+        User user = service.insert(userDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+        return ResponseEntity.created(uri).body(new UserDTO(user));
     }
 }
