@@ -30,6 +30,7 @@ public class Instantiation implements CommandLineRunner {
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         userRepository.deleteAll();
+        postRepository.deleteAll();
 
 
         User leonardo = new User(null, "Leonardo", "leonardo@gmail.com");
