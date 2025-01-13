@@ -2,7 +2,9 @@ package com.example.mongodb_springboot.dto;
 
 import com.example.mongodb_springboot.domain.User;
 
-public class AuthorDTO {
+import java.io.Serializable;
+
+public class AuthorDTO implements Serializable {
     private String id;
     private String name;
 
