@@ -1,13 +1,11 @@
 package com.example.mongodb_springboot.resources;
 
 import com.example.mongodb_springboot.domain.Post;
+import com.example.mongodb_springboot.resources.util.URL;
 import com.example.mongodb_springboot.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,10 +22,16 @@ public class PostResource {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(value = {"/{id}"})
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Post> findById(@PathVariable String id) {
         Post object = postService.findById(id);
         return ResponseEntity.ok().body(object);
     }
 
+    @GetMapping(value = "/titleSearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam String text) {
+        text = URL.decodeParam(text);
+        List<Post> list = postService.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
 }
