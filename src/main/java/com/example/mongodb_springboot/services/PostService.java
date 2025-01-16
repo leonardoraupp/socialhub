@@ -6,6 +6,7 @@ import com.example.mongodb_springboot.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,11 @@ public class PostService {
     }
 
     public List<Post> findByTitle(String text) {
-        return repository.findByTitleContainingIgnoreCase(text);
+        return repository.findByTitle(text);
+    }
+
+    public List<Post> findByMultipleFields(String text, Date minDate, Date maxDate) {
+        maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);  // add 24h(1 day) to maxDate.
+        return repository.findByMultipleFields(text, minDate, maxDate);
     }
 }
