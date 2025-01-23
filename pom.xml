@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>mongodb-springboot</artifactId>
+	<artifactId>socialhub</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mongodb-springboot</name>
-	<description>Demo project for Spring Boot with MongoDB database</description>
+	<description>Socialhub is a social media API</description>
 	<url/>
 	<licenses>
 		<license/>
